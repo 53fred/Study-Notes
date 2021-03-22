@@ -162,7 +162,7 @@ aObj.func2(); //CORRECT!
 # 转换
 **将Const类型转化为非Const类型的方法：**
 采用const_cast 进行转换。  
-**用法：**const_cast (expression)
+**用法：** const_cast (expression)
 - 常量指针被转化成非常量指针，并且仍然指向原来的对象；
 - 常量引用被转换成非常量引用，并且仍然指向原来的对象；
 - 常量对象被转换成非常量对象。
