@@ -78,20 +78,73 @@ Eg：const char * GetString(void);
 //char *str = GetString(); WRONG!
 const char *str = GetString(); //CORRECT!
 ```
-- const修饰**类的成员函数**（函数定义体）时，表示在函数体中成员变量不能改变。
+
+### 2.2. 修饰类的成员函数
+- const（函数定义体）修饰类的成员函数时，表示在函数体中**成员变量不能改变**。
 - 任何不会修改数据成员(即函数中的变量)的 函数都应该声明为const 类型。如果在编写const 成员函数时，不慎修改了数据成员，或者调用了其它非const 成员函数，编译器将指出错误，这无疑会提高程序的健壮性。
 ```C++
 Eg：int ff(void) const;
 ```
 
-### 2.2.修饰“值传递方式”函数的返回值(无意义)
+### 2.3.修饰“值传递方式”函数的返回值(无意义)
 ```C++
 Eg：const int GetInt(void);
 ```
-### 2.3.
+
+### 2.4.修饰“返回引用”函数的返回值
+- 如果返回值不是内部数据类型，将函数MyClass GetObj(void) 改写为const Myclass & GetObj(void)的确能提高效率。但此时千万千万要小心，一定要搞清楚函数究竟是想返回一个对象的“拷贝”还是仅返回“别名”就可以了，否则程序会出错。
+> 通常，不建议用const修饰函数的返回值类型为某个对象或对某个对象引用的情况。原因如下：如果返回值为某个对象为const（const A test = A 实例）或某个对象的引用为const（const A& test = A实例） ，则返回值具有const属性，则返回实例只能访问类A中的公有（保护）数据成员和const成员函数，并且不允许对其进行赋值操作，这在一般情况下很少用到。
 
 # 面向对象
 ## 1.成员变量
+- 表示成员常量，不能被修改。
+- 类的const成员变量必须在**构造函数的参数初始化列表**中进行初始化。
+- **构造函数内部，不能对const成员赋值**，编译器直接报错。
+- 构造函数列表初始化**执行顺序与成员变量在类中声明相同**，**与初始化列表中语句书写先后无关**。  
+**方法1：构造函数初始化列表方式(C++98)**
+```C++
+Eg：
+class CExample
+{
+public:
+	CExample():m_a(1),m_b(2){/*m_a = 1; compile error*/}
+	CExample(const CExample&c):m_a(1){/*m_a = 1; compile error*/}
+	~CExample(){}
+private:
+	const int m_a;
+	int m_b;
+};
+```
+**方法2：类内初始化(c++11支持)**
+```C++
+class Tag
+{
+public:
+    const int a = 9;
+};
+```
+- static const 数据成员变量初始化：
+其一：const  修饰表示其为const成员，因而为类共享的数据在类内初始化提供了可能。
+其二：static修饰表示其为类所有对象所共有，因而如果使用构造函数初始化列表的方式的话，每构造一个对象都会构造一个static数据成员变量，这并不合理。  
+**方法1：**
+```C++
+class Test
+{
+public:
+    const static int c; // 与static const int c;相同,可以在这里定义(如果以后在类中需要使用该变量的话).
+}
+
+const int Test：： c ＝ 0；//注意：给静态成员变量赋值时，不在需要加static修饰。但const要加。
+```
+**方法2：**
+```C++
+class Tag
+{
+public:
+    static const int a = 9; // static和const顺序先后不影响
+};
+```
+
 ## 2.成员函数
 ## 3.类对象/对象指针/对象引用
 # 转换
