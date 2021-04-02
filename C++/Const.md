@@ -6,6 +6,35 @@
 ```C++
 Eg：const int Max = 100；
 ```
+## 1. extern
+定义一个全局的符号常量：
+- 在a.cpp中定义extern const double pi=3.14; b.pp中extern const double pi;可以通过编译运行。  
+- 在a.cpp中定义const double pi=3.14; b.pp中extern const double pi;编译失败。  
+
+**原因：**
+- const对象是文件局部变量。意味着，其他文件将不能Link到本文件的Const变量。
+- 如果在const前面加extern，意味着这个const对象可以被其他文件link到。
+```C++
+1.cpp
+extern const int i; //const int i = 1;
+const int i = 1; //extern const int i;
+
+2.cpp
+extern const int i = 2;
+```
+代码不能通过链接，而如果按注释里的顺序就能通过链接。
+
+**原因：**
+- 在通过extern const变量进行获取声明而非初始化的时候，编译器会首先选择寻找这句extern之前有没有该对象的初始化声明。这是容易理解的，因为const的作用域本来就是文件作用域。如果在自己extern之前找不到（编译器是自上而下编译代码，它并不知道自己之后是什么），那么去外部看有没有其他使用extern方式初始化这个对象的地方。如果有，编译通过。如果没有会报link错误。
+
+## 2. 引用
+在初始化常量引用时允许用任意表达式作为初始值，允许引用绑定非常量、字面值：
+```C++
+int i = 2;
+const int &r1 = i;
+const int &r2 = 3;
+const int &r3 = r1 * 2;
+```
 
 # 指针
 看关键字const右边来确定什么被声明为常量 ，如果该关键字的右边是类型，则值是常量；如果关键字的右边是指针变量，则指针本身是常量。  
