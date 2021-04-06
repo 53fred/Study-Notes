@@ -45,3 +45,13 @@ r = &i;   //等于将p指向i
 ```
 ## 5. void指针
 可用于存放任意对象的地址，但不能直接操作指针所指对象。
+
+## 6. decltype
+作用是选择并返回操作数的数据类型。  
+decltype处理const与auto的区别：decltype返回变量的类型包括const与引用
+```C++
+const int ci = 0, &ci = cj;
+decltype(ci) x = 0; //x的类型是const int
+decltype(cj) y = x; //y的类型是const int &，y绑定到x
+decltype(cj) z;     //错误，引用必须初始化
+```
