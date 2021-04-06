@@ -54,4 +54,7 @@ const int ci = 0, &ci = cj;
 decltype(ci) x = 0; //x的类型是const int
 decltype(cj) y = x; //y的类型是const int &，y绑定到x
 decltype(cj) z;     //错误，引用必须初始化
+
+int i = 42, *p = &i;
+decltype(*p) c;     //错误，c是int&，必须初始化
 ```
