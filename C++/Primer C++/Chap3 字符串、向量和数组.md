@@ -1,1 +1,22 @@
+# 1. string
+## 1.1. 初始化
+```C++
+string s1;
+string s2(s1);    //s2 is copy of s1
+string s2 = s1;   //equal to upper one
+string s3("abc"); //s3 is copy of "abc"
+string s4(n, 'c');//s4 contains n * 'c'
+```
+- **直接初始化与拷贝初始化：**  
+**拷贝初始化：** 使用等号进行初始化；  
+**直接初始化：** 使用括号进行初始化。
 
+## 1.2. 操作
+```C++
+getline(in, s); 
+s.empty();      //return true if is empty
+s.size();     
+s[n];           
+s1+s2           //append s2 to s1
+```
+- s.size()返回值为无符号的size_type类型，因此如果n为int型负值，size()<n会为true，因为n会被转换为无符号数
