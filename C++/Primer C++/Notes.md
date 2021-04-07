@@ -56,5 +56,6 @@ decltype(cj) y = x; //y的类型是const int &，y绑定到x
 decltype(cj) z;     //错误，引用必须初始化
 
 int i = 42, *p = &i;
-decltype(*p) c;     //错误，c是int&，必须初始化
+decltype(*p) c;     //错误，解引用指针可以得到指针所指变量，所以c是int&，必须初始化
 ```
+decltype((variable))的结果永远是引用，decltype(variable)的结果只有当variable本身是引用是才是引用。
