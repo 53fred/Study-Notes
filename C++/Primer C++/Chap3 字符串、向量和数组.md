@@ -70,4 +70,13 @@ vector<T> v4 = {a,b,c...}; //包含初始值个数的元素
 vector<T> v1;
 auto b = v1.begin(), e = v1.end();
 ```
-- begin返回指向第一个元素的迭代器，end返回指向容器尾下一元素的迭代器，即一个不存在的尾后元素。如果容器为空，二者返回同一个迭代器。
+- begin返回指向第一个元素的迭代器，end返回指向容器尾下一元素的迭代器，即一个不存在的尾后元素。如果容器为空，二者返回同一个迭代器。  
+- 迭代器的运算：
+```C++
+*iter;
+iter->mem;  //equal to (*iter).mem
+++iter;
+--iter;
+iter1 == iter2;
+iter1 != iter2;
+```
