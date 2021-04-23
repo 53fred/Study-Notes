@@ -89,5 +89,13 @@ iter1 != iter2;
 ## 3.1. 定义和初始化
 - 数组的大小在编译时必须是已知的，即必须是常量表达式。
 - 如果没有写明大小，会根据初始值的数量进行推断。eg: int i = {0,1,2};
+- 字符串数组在使用列表进行初始化的时候没有空字符，使用字符串字面值进行初始化时结尾包含空字符。
+## 3.2. 复杂数组声明
+```C++
+int *ptrs[10];  //an array of 10 pointers
+int &refs[10]=... //ERROR!!array of reference
+int (*P)[10] = &arr; //P point to an array of 10 pointers
+int (&arrRef)[10] = arr;  //reference to an array of 10 pointers
+```
 
 
