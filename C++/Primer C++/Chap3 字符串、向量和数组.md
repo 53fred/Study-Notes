@@ -66,6 +66,8 @@ vector<T> v4 = {a,b,c...}; //包含初始值个数的元素
 
 ## 2.2. 访问
 - vector可以通过下标访问并赋值，但不能用下标形式添加元素。
+
+## 2.3. 迭代器
 ```C++
 vector<T> v1;
 auto b = v1.begin(), e = v1.end();
@@ -80,3 +82,4 @@ iter->mem;  //equal to (*iter).mem
 iter1 == iter2;
 iter1 != iter2;
 ```
+
