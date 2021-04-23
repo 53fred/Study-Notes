@@ -49,3 +49,15 @@ islower(c)
 tolower(c)
 toupper(c)
 ```
+
+# 2. vector
+## 2.1. 初始化
+```C++
+vector<T> v1;
+vector<T> v2(v1); //包含v1副本
+vector<T> v2 = v1;
+vector<T> v3(n,val); //包含n个重复元素，每个元素值是val
+vector<T> v3(n); //包含n个执行了初始化的元素
+vector<T> v4{a,b,c...}; //包含初始值个数的元素
+vector<T> v4 = {a,b,c...}; //包含初始值个数的元素
+```
