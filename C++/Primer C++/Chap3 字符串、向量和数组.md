@@ -97,7 +97,24 @@ int &refs[10]=... //ERROR!!array of reference
 int (*P)[10] = &arr; //P point to an array of 10 pointers
 int (&arrRef)[10] = arr;  //reference to an array of 10 pointers
 ```
-## 3.3. 获取数组首尾指针
-- int * beg = begin(ia), * last = end(ia);  
+## 3.3. 访问
+- 获取数组首尾指针：int * beg = begin(ia), * last = end(ia);  
+- 只要指针指向的是数组中的元素，都可以执行下标计算：
+```C++
+int *p = &i[2];
+int k = p[-2];  //i[0]
+```
+## 3.4. 字符串与字符数组
+- strlen只能用于char[]，不能用于string
+- string可以使用 > < 比较大小，而char* 比较的是地址。
+```C++
+string s1 = "a";
+string s2 = "b";
+if (s1 < s2)  //correct
+
+char ca1[] = "a";
+char ca2[] = "b";
+if (ca1 < ca2)  //wrong
+```
 
 
