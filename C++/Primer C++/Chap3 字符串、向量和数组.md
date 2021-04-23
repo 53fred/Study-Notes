@@ -30,7 +30,9 @@ string s7 = "a" + "b" + s4; //false
 
 - **字符串中删除字符：** str.erase();
 ```C++
-
+erase(pos, n);  //erase n characters starting from pos
+erase(position);  //erase one char at position, position need to be an iterator eg:str.begin()+i
+erase(first, last)  //erase characters in between first and last. First and last both have to be iterator.
 ```
 
 - **getline 与 cin 的区别：**  
