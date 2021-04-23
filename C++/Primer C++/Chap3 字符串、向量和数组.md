@@ -97,5 +97,7 @@ int &refs[10]=... //ERROR!!array of reference
 int (*P)[10] = &arr; //P point to an array of 10 pointers
 int (&arrRef)[10] = arr;  //reference to an array of 10 pointers
 ```
+## 3.3. 获取数组首尾指针
+- int * beg = begin(ia), * last = end(ia);  
 
 
