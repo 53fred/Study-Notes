@@ -26,6 +26,11 @@ string s4 = s1 + ",";   //true
 string s5 = "a" + "b";  //false
 string s6 = s4 + "a" + "b"; //true, s4 + "a" become string
 string s7 = "a" + "b" + s4; //false
+```  
+
+- 字符串中删除字符：str.erase();
+```C++
+
 ```
 
 - **getline 与 cin 的区别：**  
