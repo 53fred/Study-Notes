@@ -14,26 +14,20 @@ size_t calls()
 ```C++
 bool isshorter(const string &s1, const string &s2);
 ```
-## 2.2. const形参和实参
-- const与否不属于重载。
-```C++
-void func(int i);
-void func(const int i); //ERROR!
-```
-## 2.3. 数组引用形参
+## 2.2. 数组引用形参
 ```C++
 void func(int (&arr)[10]);  //下标[]优先级比&高，不加括号会变成引用的数组
 
 void swap(int *&a, int*&b); //不加引用的话，可以改变*a与*b的值，不可以改变指针所指地址。也不可以写作int &*a，会变成指向引用的指针。
 ```
 
-## 2.4. argc与argv
+## 2.3. argc与argv
 - **可选的实参从argv[1]开始**，argv[0]保存程序的名字，而非用户输入。
 - **不加参数的话argc为1**.
 
-## 2.5. 含有可变形参的函数
-### 2.5.1. initializer_list(C++ 11)
-### 2.5.2. 省略符形参
+## 2.4. 含有可变形参的函数
+### 2.4.1. initializer_list(C++ 11)
+### 2.4.2. 省略符形参
 - 只能放在参数列表最后。
 ```C++
 void func(param_list,...);  
@@ -67,3 +61,39 @@ eg: int (*func(int i))[10];
 //(*func(int i))[10]：表示解引用函数的结果会得到大小是10的数组。
 //int (*func(int i))[10]：表示数组中的元素是int型。
 ```
+
+# 4. 函数重载
+- 形参需不同，不允许仅有返回类型不同。
+- **顶层const不属于重载**。
+```C++
+Record lookup(Phone);
+Record lookup(const Phone); //ERROR!
+
+Record lookup(Phone*);
+Record lookup(Phone* const); //顶层const,ERROR!
+
+Record lookup(Phone&);
+Record lookup(const Phone&); //CORRECT
+
+Record lookup(Phone*);
+Record lookup(const Phone*); //底层const,CORRECT!
+```
+
+# 5. 默认实参
+- **一旦某个形参被赋予默认值，后面的所有形参都要有默认值**。
+```C++
+int func(int a, int b, char c = 'A');
+```
+- 默认实参负责填补函数调用时缺少的尾部实参。
+```C++
+func(0,1);
+```
+
+# 6. constexpr(C++ 11)
+- 常量表达式，编译时直接返回表达式结果，函数的返回值和形参类型必须是字面值类型，并且函数体内有且只有一条return。
+
+# 7. 调试
+## 7.1. assert(expr)
+- 如果表达式为0，输出信息并终止程序的执行。
+## 7.2. NDEBUG
+- 如果定义了NDEBUG，assert什么也不做。
