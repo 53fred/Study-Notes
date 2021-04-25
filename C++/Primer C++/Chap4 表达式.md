@@ -44,4 +44,31 @@ vec[ival++] <= vec[ival]; //执行顺序未定义，改为vec[ival] <= vec[ival 
 9. ||
 10. ?:
 11. =（简单赋值）
-12. ,
+12. ,  
+
+```C++
+somevalue ? ++x, ++y : --x, --y;  // 逗号优先级低，表达式变为(somevalue ? ++x, ++y : --x), --y;
+```
+
+# 2. sizeof运算符
+- 对string对象或者vector对象执行sizeof运算，显示的是容器大小，与编译器有关，与容器内有多少数据无关。
+
+# 3. 强制类型转换
+```C++
+cast-name<type>(expression);
+```  
+## 3.1. static_cast
+- 可以大转小，用于基本类型的转换、non_const转换为const、空指针转换为目标类型指针。
+```C++
+double s = static_cast<double>(j);
+
+void *p = &d;
+double *dp = static_cast<double*>(p);
+```  
+## 3.2. const_cast
+- 用于修改类型的const属性。一般用于强制消除对象的常量性。
+- **如果对象是常量，执行写操作会产生未定义的后果**。
+
+## 3.3. reinterpret_cast
+- 简单的从一个指针的值到另一个指针的值的二进制拷贝。
+- **与static_cast的区别**：static_cast完成相关类型的转换，reinterpret_cast完成不相关类型的转换，通常用作**不同类型指针间的转换**，因为指针的长度是一样的。
