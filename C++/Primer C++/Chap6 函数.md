@@ -97,3 +97,13 @@ func(0,1);
 - 如果表达式为0，输出信息并终止程序的执行。
 ## 7.2. NDEBUG
 - 如果定义了NDEBUG，assert什么也不做。
+
+# 8. 函数指针 
+```C++
+bool (* pf) (const string&, const string&); //括号必须要加，不然会变成返回值bool*的函数
+pf = lengthcompare; //pf指向名为lengthcompare的函数
+
+bool b1 = pf("a", "ab");  //直接调用lengthcompare
+bool b2 = (*pf)("a", "ab");  //等价
+```
+
