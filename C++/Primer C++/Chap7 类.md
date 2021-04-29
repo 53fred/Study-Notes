@@ -27,6 +27,23 @@ cc::cc(int ii)		//WRONG!
 cc::cc(int ii):i(ii),i2(ii),i3(i){}	//CORRECT!
 ```
 - 构造函数初始值列表只说明用于初始化成员的值，而**不限定初始化的具体执行顺序**。**成员的初始化顺序与它们在类定义中的出现顺序一致**。
+- 应尽量避免用某些数据成员初始化其他数据成员。
+## 1.2. 委托构造函数（C++11）
+```C++
+class cc
+{
+public:
+	cc(int i1,int i2,int i3):i(i1),i2(i2),i3(i3){}	//非委托构造函数
+	//其余构造函数全部委托给另一个构造函数
+	cc(): cc(1,2,3){}
+	cc(int i0):cc(i0,2,3){}
+private:
+	int i;
+	const int i2;
+	int i3;
+}
+```
+- 第一个构造函数接受三个实参
 
 # 2. class与struct
 - 使用class和struct定义类的唯一区别就是默认访问权限。
