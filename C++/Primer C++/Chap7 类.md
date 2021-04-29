@@ -1,8 +1,30 @@
 # 1. 构造函数
 - 构造函数在const对象构造过程中可以向其写值。
 ## 1.1. 构造函数初始值列表
+- 初始值列表比显示赋值更好。如果显示赋值，在执行之前会先进行默认初始化。
+- 初始化const或者引用类型的数据成员的**唯一机会就是通过构造函数初始值**，也即通过初始值列表，不可以通过显示赋值来进行初始化。
 ```C++
 Person::Person():name("abc"){}
+Person::Person(){name="abc";}
+
+class cc
+{
+public:
+	cc(int ii);
+private:
+	int i;
+	const int i2;
+	int &i3;
+}
+
+cc::cc(int ii)		//WRONG!
+{
+	i = ii;
+	i2 = ii;	//ERROR!
+	i3 = i;		//ERROR!
+}
+
+cc::cc(int ii):i(ii),i2(ii),i3(i){}	//CORRECT!
 ```
 # 2. class与struct
 - 使用class和struct定义类的唯一区别就是默认访问权限。
