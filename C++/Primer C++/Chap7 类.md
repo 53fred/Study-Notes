@@ -26,6 +26,8 @@ cc::cc(int ii)		//WRONG!
 
 cc::cc(int ii):i(ii),i2(ii),i3(i){}	//CORRECT!
 ```
+- 构造函数初始值列表只说明用于初始化成员的值，而**不限定初始化的具体执行顺序**。**成员的初始化顺序与它们在类定义中的出现顺序一致**。
+
 # 2. class与struct
 - 使用class和struct定义类的唯一区别就是默认访问权限。
 - struct：定义在第一个访问说明符之前的成员是public的。
