@@ -16,3 +16,17 @@ public:
 	friend int CalculateArea(Point& p1, Point& p2); //申明此函数为友元函数，此函数在外部能访问类的私有成员
 }
 ```
+# 4. 名字查找与类的作用域
+```C++
+typedef double Money;
+string bal;
+class Account
+{
+public:
+	Money balance(){return bal;}
+private:
+	Money bal;
+}
+```
+- 编译器看到balance的语句时，会在Account类的作用域内寻找Money的声明。由于没有找到，会在外层作用域中继续查找。在先找到typedef double Money后，该类型会被用作balance的返回类型以及数据成员bal的类型。
+- 类型名的定义通常出现在类的开始处，确保所有使用该类型的成员都出现在类名的定义之后。
