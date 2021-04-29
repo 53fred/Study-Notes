@@ -43,7 +43,6 @@ private:
 	int i3;
 }
 ```
-- 第一个构造函数接受三个实参
 
 # 2. class与struct
 - 使用class和struct定义类的唯一区别就是默认访问权限。
