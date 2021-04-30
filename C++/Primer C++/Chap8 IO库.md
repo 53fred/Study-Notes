@@ -11,3 +11,12 @@ while(cin>>temp)  //遇到EOF后cin置为错误，跳出循环
 cin.clear();  //将cin置为正常状态
 ```
 # 1.2. 输出缓冲
+- 缓冲刷新时，数据才真正写到设备或文件。
+- 导致缓冲刷新的原因：  
+  1. return；  
+  2. 缓冲区满；  
+  3. endl；  
+  4. 设置unitbuf；（Flush buffer after insertions）  
+  5. 输出流关联到另一个流（cin和cerr关联到cout）。
+  
+  
