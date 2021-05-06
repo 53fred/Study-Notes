@@ -16,7 +16,9 @@ cin.clear();  //将cin置为正常状态
   1. return；  
   2. 缓冲区满；  
   3. endl；  
-  4. 设置unitbuf；（Flush buffer after insertions）  
+  4. 设置unitbuf；（Flush buffer after insertions，每次写操作之后都进行一次flush）  
   5. 输出流关联到另一个流（cin和cerr关联到cout）。
-  
-  
+- 刷新输出缓冲：
+  1. endl：输出内容和一个换行符，刷新缓冲；
+  2. flush：输出内容，不附加任何字符，刷新缓冲；
+  3. ends：输出内容和一个空字符，刷新缓冲。
