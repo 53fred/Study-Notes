@@ -16,4 +16,14 @@
 - 如果要求随机访问，应使用vector或deque。
 - 如果要在容器的中间插入/删除元素，使用list。
 - 如果要在头尾插入/删除元素，使用deque。
-# 2. 
+
+# 2. 容器库
+## 2.1. begin和end成员
+- begin和end有多个版本，带r的版本返回反向迭代器，以c开头的版本返回const迭代器。
+```C++
+list<string> a;
+auto it1 = a.begin();   //list<string>::iterator
+auto it2 = a.rbegin();  //list<string>::reverse_iterator
+auto it3 = a.cbegin();  //list<string>::const_iterator
+auto it4 = a.crbegin(); //list<string>::const_reverse_iterator
+```
