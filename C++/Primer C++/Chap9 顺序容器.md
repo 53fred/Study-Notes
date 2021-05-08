@@ -28,3 +28,14 @@ auto it3 = a.cbegin();  //list<string>::const_iterator
 auto it4 = a.crbegin(); //list<string>::const_reverse_iterator
 ```
 - 以c开头的版本是C++新标准引入的，老版本只能显示声明使用哪种迭代器。
+## 2.2. 定义和初始化
+```C++
+C c;            //默认构造函数
+C c1(c2);       //c1初始化为c2的拷贝。对于array类型，c1c2长度需要相等。
+C c1 = c2;      //同上
+C c{a,b,c...};  //c初始化为列表中元素的拷贝。对于array类型，列表元素个数必须小于等于array大小。
+C c(b,e);       //c初始化为迭代器b和e
+//以下为大小参数，只有顺序容器（不包括array）才能接受
+C seq(n);       //seq包含n个元素，每个元素进行值初始化
+C seq(n,t);     //seq包含n个初始化为值t的元素
+```
