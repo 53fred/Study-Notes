@@ -27,3 +27,4 @@ auto it2 = a.rbegin();  //list<string>::reverse_iterator
 auto it3 = a.cbegin();  //list<string>::const_iterator
 auto it4 = a.crbegin(); //list<string>::const_reverse_iterator
 ```
+- 以c开头的版本是C++新标准引入的，老版本只能显示声明使用哪种迭代器。
