@@ -47,8 +47,17 @@ c1 = c2;
 c = {a,b,c...};
 swap(c1,c2);    //交换元素。swap通常比拷贝元素快得多。
 c1.swap(c2);    //同上
-//assign不适用于关联容器与array
+//assign适用于顺序容器（不包括array）
 seq.assign(b,e);//将seq中元素替换为迭代器范围内元素。迭代器不能指向seq中的元素。
 seq.assign(il);//将seq中元素替换为初始化列表il中的元素。
 seq.assign(n,t);//将seq中元素替换为n个值为t的元素。
 ```
+## 2.4. 容器大小操作
+- size
+- empty
+- max_size
+## 2.5. 关系运算符
+- 比较两个容器实际上是对容器中的元素逐对比较，比较方式与string的比较方式类似。
+
+# 3. 顺序容器操作
+## 3.1. 添加元素
