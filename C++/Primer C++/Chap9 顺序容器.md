@@ -61,9 +61,10 @@ seq.assign(n,t);//将seq中元素替换为n个值为t的元素。
 
 # 3. 顺序容器操作
 ## 3.1. 添加元素
-- push_back(t)/emplace_back(args)
+- push_back(t)/emplace_back(args)：emplace_back会在容器管理的内存空间中直接创建对象。push_back则会创建一个局部临时对象，并将其压入容器中。
 - push_front(t)/emplace_front(args)
 - insert(p,t)/emplace(p,args)：在迭代器p指向的元素之前创建一个值为t或由args创建的元素。返回指向新添加的元素的迭代器。
 - insert(p,n,t)：在迭代器p指向的元素之前插入n个值为t的元素。返回指向新添加的第一个元素的迭代器；若n为0，返回p。
 - insert(p,b,e)：在迭代器p指向的元素之前插入迭代器b和e范围内的元素。返回指向新添加的第一个元素的迭代器；若n为0，返回p。
 - insert(p,il)：il是一个花括号包围的元素值列表。在迭代器p指向的元素之前插入il。返回指向新添加的第一个元素的迭代器；若n为0，返回p。
+## 3.2. 访问元素
