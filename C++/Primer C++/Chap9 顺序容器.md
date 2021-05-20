@@ -71,3 +71,16 @@ seq.assign(n,t);//将seq中元素替换为n个值为t的元素。
 - 每个顺序容器都有一个front函数，除forward_list外都有back函数。这两个操作分别返回首元素和尾元素的引用。
 - 在调用front和back之前，要保证容器非空。
 ## 3.3. 删除元素
+- pop_back()：删除尾元素，返回void。  
+- pop_front()：删除首元素，返回void。
+- erase(p)：删除迭代器p所指元素，返回被删元素之后元素的迭代器。
+- erase(b,e)：删除迭代器区间内的元素，返回被删元素之后元素的迭代器。
+- clear()：删除所有元素，返回void。
+## 3.4. 改变容器大小
+- 可以用resize来增大或减小容器。array不支持resize。
+```C++
+list<int> ilist(10,42);     //10个int，每个值为42
+ilist.resize(15);           //将5个值为0的元素添加到末尾
+ilist.resize(25,-1);        //将10个值为-1的元素添加到末尾
+ilist.resize(5);            //从末尾删除20个元素
+```
