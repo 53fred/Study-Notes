@@ -13,7 +13,7 @@ string s4(n, 'c');//s4 contains n * 'c'
 
 ## 1.2. 操作
 ```C++
-getline(in, s); 
+getline(in, s);
 s.empty();      //return true if is empty
 s.size();     
 s[n];           
@@ -58,8 +58,8 @@ vector<T> v2(v1); //包含v1副本
 vector<T> v2 = v1;
 vector<T> v3(n,val); //包含n个重复元素，每个元素值是val
 vector<T> v3(n); //包含n个执行了初始化的元素
-vector<T> v4{a,b,c...}; //包含初始值个数的元素
-vector<T> v4 = {a,b,c...}; //包含初始值个数的元素
+vector<T> v4{a,b,c...}; //包含初始值个数的元素    C++11
+vector<T> v4 = {a,b,c...}; //包含初始值个数的元素 C++11
 ```
 - **区分vector<int> v1{10}与vector<string> v2{10}** ： 前者包含一个值为10的元素，后者包含10个默认值初始化的元素。
 - **圆括号：** 构造vector；**花括号：** 进行列表初始化，如果不能初始化就按照圆括号进行构造。
@@ -118,5 +118,3 @@ if (ca1 < ca2)  //wrong
 ```
 - 任何出现字符串字面值的地方都可以使用以空字符结束的字符串数组替代。
 - **string.c_str()产生的数组并非一直有效**，string被改变后数组会失去效用。
-
-
