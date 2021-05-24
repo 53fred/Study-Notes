@@ -84,3 +84,19 @@ ilist.resize(15);           //将5个值为0的元素添加到末尾
 ilist.resize(25,-1);        //将10个值为-1的元素添加到末尾
 ilist.resize(5);            //从末尾删除20个元素
 ```
+- vector与string的大小管理操作：
+```C++
+c.capacity();   //容器在不扩张内存空间的情况下可以容纳多少元素
+c.size();       //实际大小
+c.reserve(n);   //通知容器分配至少能容纳n个元素的内存空间
+c.shrink_to_fit();//将capacity减少为size同大小
+```
+- **reserve增加capacity，但是size不变。resize增加capacity和size。当需求大学小于capacity时，容器不会退回内存空间**。
+
+## 3.5. 额外的string操作
+### 3.5.1. 构造函数
+```C++
+string s(cp,n); //s是cp指向的数组中前n个字符的拷贝
+string s(s2,pos2); //s是string s2从下表pos2开始的拷贝
+string s(s2,pos2,len2); //s是string s2从下表pos2开始的len2个字符的拷贝
+```
