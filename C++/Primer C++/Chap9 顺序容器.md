@@ -100,3 +100,10 @@ string s(cp,n); //s是cp指向的数组中前n个字符的拷贝
 string s(s2,pos2); //s是string s2从下表pos2开始的拷贝
 string s(s2,pos2,len2); //s是string s2从下表pos2开始的len2个字符的拷贝
 ```
+### 3.5.2. substr
+- substr返回一个string，是原始string的一部分或全部的拷贝。
+```C++
+string s("hello world");
+string s2 = s.substr(0, 5);
+string s2 = s.substr(pos, n); //从pos开始n个字符的拷贝
+```
