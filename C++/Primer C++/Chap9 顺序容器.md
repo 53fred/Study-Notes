@@ -107,3 +107,21 @@ string s("hello world");
 string s2 = s.substr(0, 5);
 string s2 = s.substr(pos, n); //从pos开始n个字符的拷贝
 ```
+### 3.5.3. 修改string
+```C++
+s.insert(pos, args); //在pos之前插入args指定的字符。pos可以是一个下标或迭代器。
+s.erase(pos, len);  //删除从pos开始的len个字符
+s.assign(args);     //将s中的字符修改为args指定的字符。
+s.append(args);     //将args追加到s
+s.replace(range, args); //删除s中范围range内的字符，替换为args指定的字符。
+```
+### 3.5.4. string的搜索操作
+```C++
+s.find(args);   //查找args第一次出现的位置
+s.rfind(args);  //查找args最后一次出现的位置
+s.find_first_of(args);  //查找args中任何一个字符第一次出现的位置
+s.find_last_of(args);   //查找args中任何一个字符最后一次出现的位置
+s.find_first_not_of(args);  //查找第一个不在args的字符
+s.find_last_of(args);       //查找最后一个不在args的字符
+```
+### 3.5.5. compare函数
