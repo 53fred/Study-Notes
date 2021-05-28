@@ -15,3 +15,16 @@ vector：相关联数据，顺序处理
     list：排列顺序与插入顺序一致，元素可以重复；  
     set：不保证顺序，元素不可重复。  
 - 有序容器：map、set，关键字类型必须定义元素比较的方法。
+
+## 1.1. pair类型
+定义在头文件utility中.
+```C++
+pair<string, string> anon;  //保存两个string
+pair<string, string> author{"a", "bc"};
+```
+- pair的默认构造函数对数据成员进行值初始化.
+- pair的数据成员是public的,两个成员分别命名为first和second.
+
+```C++
+cout << author.first << author.second;
+```
