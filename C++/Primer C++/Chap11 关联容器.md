@@ -28,3 +28,15 @@ pair<string, string> author{"a", "bc"};
 ```C++
 cout << author.first << author.second;
 ```
+- pair上的操作:
+```C++
+pair<T1, T2> p;
+pair<T1, T2> p(v1, v2);
+pair<T1, T2> p = {v1, v2};
+make_pair(v1, v2)   //返回一个用v1和v2初始化的pair,pair的类型从v1和v2推断出来.
+p.first
+p.second
+p1 relop p2         //关系运算符(<,>,<=,>=)按字典序定义
+p1 == p2
+p1 != p2
+```
