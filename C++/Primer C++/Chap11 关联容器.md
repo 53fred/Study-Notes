@@ -40,3 +40,33 @@ p1 relop p2         //关系运算符(<,>,<=,>=)按字典序定义
 p1 == p2
 p1 != p2
 ```
+# 2. 关联容器操作
+- 关联容器的额外类型别名:
+```C++
+key_type:容器类型的关键字类型
+mapped_type:每个关键字关联的类型,只适用于map
+value_type:对于set,与key_type相同;
+            对于map,为pair<const key_type, mapped_type>.
+```
+- map的迭代器返回一个pair类型,其中first成员保存const关键字,second成员保存值.**可以修改值,不可以修改关键字**.
+- set的迭代器是const的,可以读取,不可以修改.
+
+## 2.1. 添加操作
+- map:
+```C++
+word_count.insert({word,1});
+word_count.insert(make_pair(word,1));
+word_count.insert(pair<string,size_t>(word,1));
+word_count.insert(map<string,size_t>::value_type(word,1));
+```
+- 关联容器insert操作
+```C++
+c.insert(v);    //v是一个value_type类型的对象
+c.emplace(args);//args用来构造一个元素
+
+c.insert(b,e);  //b和e是迭代器
+c.insert(il);   //il是一个花括号包围的元素值列表
+
+c.insert(p,v);  //p作为一个提示,指出从哪里开始搜索新元素应该存储的位置
+c.emplace(p,args);
+```
