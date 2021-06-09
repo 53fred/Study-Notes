@@ -75,7 +75,7 @@ c.emplace(p,args);
 ## 2.2. 删除元素
 - erase接受一个key_type元素,删除所有匹配元素,返回删除元素数量.
 ```C++
-c.erase(k); //删除关键字为k的元素
+c.erase(k); //删除关键字为k的元素    
 c.erase(p); //p是迭代器
 c.erase(b,e); //删除两个迭代器之间的元素
 ```
@@ -90,6 +90,7 @@ c.at(k);//访问关键字为k的元素,若不存在,抛出异常
 ```
 - **对map进行下标操作时,返回一个mapped_type对象;当解引用一个map迭代器时,返回一个value_type对象**.
 - map的下标运算符**返回一个左值,既可以读也可以写**.
+- **下标与insert的区别：如果重复出现多次同样的key值 ，用下标操作后面的value会替换前面的value，而insert则不会替换**。
 
 ## 2.4. 访问元素
 ```C++
@@ -100,5 +101,30 @@ iset.count(11); //返回0
 
 c.lower_bound(k);   //返回一个迭代器，指向第一个关键字不小于k的元素
 c.upper_bound(k);   //返回一个迭代器，指向第一个关键字大于k的元素
+//lower_bound和upper_bound找不到关键词的话，会指向一个不影响排序的关键词插入位置
 c.equal_range(k);   //返回一个迭代器pair，表示关键字等于k的元素的范围。若k不存在，两个成员均等于c.end()
+```
+- 对map使用find代替下标操作。
+
+# 3. 无序容器
+- 无序容器在存储上组织为一组桶，每个桶保存零个或多个元素。无序容器使用一个哈希函数将元素映射到桶。
+- 无序容器管理操作：
+```C++
+//桶接口
+c.bucket_count();       //正在使用的桶的数目
+c.max_bucket_count();   //容器能容纳的最多的桶的数量
+c.bucket_size(n);       //第n个桶中有多少元素
+c.bucket(k);            //关键字为k的元素在哪个桶中
+
+//桶迭代
+local_iterator          //可以用来访问桶中元素的迭代器类型
+const_local_iterator
+c.begin(n), c.end(n)    //桶n的首元素迭代器和尾后迭代器
+c.cbegin(n), c.cend(n)    //返回const迭代器
+
+//哈希策略
+c.load_factor();        //每个桶的平均元素数量，返回float
+c.max_load_factor();    //c试图维护的平均桶大小，返回float。c会在需要时添加新的桶，以使得load_factor<=max_load_factor
+c.rehash(n);            //重组存储，使得bucket_count>=n且bucket_count>size/max_load_factor
+c.reserve(n);           //重组存储，使得c可以保存n个元素且不需要rehash
 ```
