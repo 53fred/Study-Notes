@@ -1,9 +1,11 @@
 # 1. 动态内存与动态指针
+## 1.1. shared_ptr类
 - 两种智能指针：  
     shared_ptr：允许多个指针指向同一个对象；  
     unique_ptr：独占所指向的对象。  
 weak_prt：弱引用，指向shared_ptr所管理的对象。  
-- 默认初始化的智能指针中包含一个空指针。
+- 默认初始化的智能指针中包含一个空指针。  
+
 ```C++
 //shared_ptr和unique_ptr都支持的操作
 shared_ptr<T> sp;
@@ -22,3 +24,14 @@ p = q                   //p和q都是shared_ptr，所保存的指针必须能相
 p.use_count()           //返回与p共享对象的智能指针数量
 p.unique()              //若p.use_count()为1，返回true；否则返回false
 ```
+
+- make_shared函数：  
+```C++
+shared_ptr<int> sp = make_shared<int>(42);
+shared_ptr<string> sp = make_shared<string>(10, '9');   //"9999999999"
+shared_ptr<int> sp = make_shared<int>();                //0
+```
+
+- shared_ptr自动销毁所管理的对象，还会自动释放关联的内存。
+
+## 1.2. 直接管理内存
