@@ -35,3 +35,5 @@ shared_ptr<int> sp = make_shared<int>();                //0
 - shared_ptr自动销毁所管理的对象，还会自动释放关联的内存。
 
 ## 1.2. 直接管理内存
+- 用new分配const对象是合法的。
+- 如果分配失败，会抛出bad_alloc。
