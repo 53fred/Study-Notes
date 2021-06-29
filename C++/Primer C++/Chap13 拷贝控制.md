@@ -98,3 +98,18 @@ public:
 ```
 - **在类内使用=default时，合成的函数会隐式地声明为内联的，就像其他类内声明的成员函数一样**。
 - 如果不希望合成的成员函数是内联的，应该只对成员的类外定义使用=default。
+
+## 1.6. 阻止拷贝
+- 我们通过将拷贝构造函数和拷贝赋值运算符定义为删除函数来阻止拷贝。
+- 删除函数：我们声明了它们，但不能用任何方式使用它们。
+```C++
+class Sales_data{
+public:   
+     Sales_data() = default;
+     Sales_data(const Sales_data&) = delete;                //阻止拷贝
+     Sales_data& operator=(const Sales_data&) = delete;     //阻止赋值
+     ~Sales_data() = default;
+};
+```
+- 与default不同，=delete必须出现在第一次声明处。
+- 析构函数不能是删除的成员。
