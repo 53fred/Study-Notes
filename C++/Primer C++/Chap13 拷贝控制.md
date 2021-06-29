@@ -85,3 +85,16 @@ public:
 ## 1.4. 三/五法则
 - 需要析构函数的类也需要一个拷贝构造函数和一个拷贝赋值运算符。
 - 需要拷贝操作的类也需要赋值操作，反之亦然。
+
+## 1.5. 使用=default
+- 可以对拷贝控制成员定义为=default来显式地要求编译器生成合成的版本。
+```C++
+class Sales_data{
+public:   
+     Sales_data() = default;
+     Sales_data(const Sales_data&) = default;
+     ~Sales_data() = default;
+};
+```
+- **在类内使用=default时，合成的函数会隐式地声明为内联的，就像其他类内声明的成员函数一样**。
+- 如果不希望合成的成员函数是内联的，应该只对成员的类外定义使用=default。
