@@ -7,4 +7,8 @@
 ```C++
 data1 + data2;
 operator+(data1, data2);    //等价的函数调用
+
+//调用成员运算符函数：
+data1 += data2;
+data1.operator+=(data2);
 ```
