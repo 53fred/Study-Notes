@@ -3,7 +3,8 @@
 - 重载运算符参数数量：一元运算符有一个参数，二元运算符有两个。
 - 如果一个运算符函数是成员函数，则它的第一个运算对象绑定到隐式的this指针上。因此，成员运算符函数的显式参数数量比运算符的运算对象总数少一个。
 - 对于一个运算符函数，它或者是类的成员，或者有至少一个类类型的参数，**不能为内置类型重定义运算符**。  
-- 可以直接调用一个重载的运算符函数：
+- 可以直接调用一个重载的运算符函数：  
+
 ```C++
 data1 + data2;
 operator+(data1, data2);    //等价的函数调用
@@ -22,7 +23,8 @@ data1.operator+=(data2);
 ## 2.1. 重载输出运算符
 - 通常情况下，输出运算符的第一个形参是一个非常量ostream对象的引用。非常量：向流写入内容会改变其状态；引用：因为无法直接复制一个ostream对象。
 - 第二个形参一般是一个常量的引用，该常量是要打印的类类型。常量：打印通常不改变对象内容；引用：避免复制实参。
-- operator<<一般要返回它的ostream形参。
+- operator<<一般要返回它的ostream形参。  
+
 ```C++
 ostream &operator<<(ostream &os, const Sales_item& item)
 {
@@ -36,7 +38,8 @@ ostream &operator<<(ostream &os, const Sales_item& item)
 ## 2.2. 重载输入运算符
 - 通常情况下，输入运算符的第一个形参是运算符将要读取的流的引用。
 - 第二个形参是将要读入到的对象的引用。
-- 通常返回给定流的引用。
+- 通常返回给定流的引用。  
+
 ```C++
 istream &operator>>(istream &is, Sales_item& item)
 {
@@ -58,5 +61,23 @@ istream &operator>>(istream &is, Sales_item& item)
 - 流含有错误类型的数据；
 - 读取操作到达文件的末尾或者遇到输入流的其他错误。
 
-## 3. 算术和关系运算符
+# 3. 算术和关系运算符
 - 通常情况下，把算术和关系运算符定义成非成员函数以允许对左侧或右侧的运算对象进行转换。因为这些运算符不需要改变运算对象的状态，所以形参都是常量的引用。
+- 应当使用复合赋值来定义算数运算符：  
+
+```C++
+Sales_Data operator+(const Sales_Data &lhs, const Sales_Data &rhs)
+{
+    Sales_Data sum = lhs;
+    sum += rhs;
+    return sum;
+}
+
+Sales_Data& operator+=(const Sales_Data &lhs)
+{
+    no += lhs.no;
+    return *this;
+}  
+```  
+
+## 3.1. 相等运算符
