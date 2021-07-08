@@ -250,3 +250,23 @@ fun in class A!
 <2>c是定义了operator的类的一个对象，按照上述说明一，应该调用c.operator()->fun，接着类C的重载箭头运算符的成员函数返回值类型是类类型的其它对象，那么按照说明二，应该递归应用该操作符（b.operator()->fun），那么现在来到了类B的重载箭头运算符的成员函数，此成员函数的返回值类型为指针，所以按照说明二，编译器对该指针解引用并从结果对象获取指定成员函数fun()（即(*a).fun()），由于在类B的重载箭头运算符函数中返回的是类A的指针，所以调用类A的成员函数fun(),结果就是“fun in class A!”
 
 # 7. 函数调用运算符
+
+```C++
+struct absint{
+    int operator()(int val) const{
+        return val < 0 ? -val : val;
+    }
+}
+
+int i = -42;
+absint obj;
+int iu = obj(i);
+```
+- 如果类定义了函数调用运算符，则类的对象称为函数对象。
+- 函数对象常常作为泛型算法的实参：
+
+```C++
+for_each(vs.begin(), vs.end(), PrintString(cerr, '\n'));
+```
+
+## 7.1. lambda是函数对象
