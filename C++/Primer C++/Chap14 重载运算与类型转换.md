@@ -105,3 +105,35 @@ private:
 ```
 
 # 5. 递增和递减运算符
+- 定义递增和递减运算符应该同时定义前置版本和后置版本。
+- 区分前置和后置运算符：**后置版本接收一个额外的（不被使用的）int形参**。当我们使用后置运算符时，编译器为这个形参提供一个值为0的实参。
+- 为了与内置版本一致，后置运算符应该返回对象的原值（递增或递减之前的值），返回的形式是一个值而非引用。
+
+```C++
+class StrBlobPtr{
+public:
+    StrBlobPtr& operator++();   //前置运算符
+    StrBlobPtr& operator--();
+    StrBlobPtr operator++(int); //后置运算符
+    StrBlobPtr operator--(int);
+};
+
+StrBlobPtr& StrBlobPtr::operator++(){
+    ++cur;
+    return *this;
+}
+
+StrBlobPtr StrBlobPtr::operator++(int){
+    StrBlobPtr ret = *this;
+    ++*this;
+    return ret;
+}
+```
+
+- 可以显示地调用后置运算符：
+
+```C++
+StrBlobPtr p(a1);
+p.operator++(0);    //后置
+p.operator++();     //前置
+```
