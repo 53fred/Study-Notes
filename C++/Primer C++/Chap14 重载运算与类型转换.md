@@ -118,8 +118,17 @@ public:
     StrBlobPtr operator--(int);
 private:
     //若检查成功，check返回一个指向vector的shared_ptr
-    shared_ptr<vector<string>> check(size_t, const string&) const;
-    
+    shared_ptr<vector<string>> check(size_t i, const string& msg) const
+    {
+        auto ret = wptr.lock(); //所指底层vector是否还存在？返回shared_ptr对象
+        if (!ret)
+            throw runtime_error("");
+        if (i >= ret->size())
+            throw out_of_range(msg);
+        return ret;     //否则，返回指向vector的shared_ptr
+    }
+    weak_ptr<vector<string>> wptr;
+    size_t curr;
 };
 
 StrBlobPtr& StrBlobPtr::operator++(){
@@ -149,7 +158,89 @@ p.operator++();     //前置
 class StrBlobPtr{
 public:
     string& operator*() const{
-
+        auto p = check(curr, "");   //p: shared_ptr<vector<string>>
+        return (*p)[curr];
+    }
+    string* operator->() const{
+        return &this->operator*();
     }
 };
+```
+
+- 将这两个运算符定义为const成员，因为获取一个元素并不会改变对象的状态。
+
+## 6.1. 箭头运算符
+- 对于形如point->mem的表达式来说，point必须是**指向类对象的指针或者是重载了operator->的类的对象**。根据point类型的不同，point->mem分别等价于：  
+<1> (*point).mem                            //point是一个指针  
+<2>point.operator()->mem                    //point是类的一个对象
+
+- **重载箭头操作符必须返回指向类类型的指针，或者返回定义了自己的箭头操作符的类类型对象**。  
+
+- <1>如果返回类型是**指针**，则内置箭头操作符可用于该指针，编译器**对该指针解引用并从结果对象获取指定成员**。如果被指向的类型没有定义那个成员，则编译器产生一个错误。
+- <2>如果返回类型是**类类型的其他对象**（或是这种对象的引用），则将**递归应用该操作符**。编译器检查返回对象所属类型是否具有成员箭头，如果有，就应用那个操作符；否则，编译器产生一个错误。这个过程继续下去，**直到返回一个指向带有指定成员的的对象的指针**，或者返回某些其他值，在后一种情况下，代码出错。
+
+- 实例：  
+
+```C++
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+	A() { i = 1; }
+	void fun() {
+		cout << "fun in class A!" << endl;
+	}
+public:
+	int i;
+};
+
+class B {
+	A a;
+public:
+	B() { i = 2; }
+	A* operator->() {           //重载箭头运算符的函数居然返回的是指针，也就是对象的地址
+		return &a;
+	}
+	void fun() {
+		cout << "fun in class B!" << endl;
+	}
+private:
+	int i;
+};
+
+class C {
+	B b;
+public:
+    C() { i = 3; }
+	B operator->() {             //重载箭头运算符的函数返回的是对象
+		return b;
+	}
+	void fun() {
+        cout << "fun in class C!" << endl;
+	}
+private:
+	int i;
+};
+
+int main()
+{
+	C* p = new C();     //p是类C的一个指针
+	p->fun();
+	C c;               //c是类C的对象
+	c->fun();
+	int i = c->i;
+	cout << i << endl;
+	system("pause");
+	return 0;
+}
+
+```
+
+- 输出结果：
+
+```
+fun in class C!
+fun in class A!
+1
 ```
