@@ -87,4 +87,21 @@ Sales_Data& operator+=(const Sales_Data &lhs)
 ## 3.2. 关系运算符
 - 如果存在唯一一种逻辑可靠的<定义，则应该考虑为这个类定义<运算符。如果类同时还包含==，则当且仅当<的定义和==产生的结果一致时才定义<运算符。
 
-# 4. 赋值运算符
+# 4. 下标运算符
+- 表示容器的类一般会定义下标运算符operator[]，下标运算符必须是成员函数。
+- 下标运算符通常以所访问元素的引用作为返回值，这样下标运算符可以出现在赋值运算符的任意一端。
+- 最好同时定义下标运算符的常量和非常量版本。  
+
+```C++
+class StrVec{
+public:
+    string& operator[](size_t n)
+    {return elements[n];}
+    const string& operator[](size_t n) const
+    {return elements[n];}
+private:
+    string *elements;
+}
+```
+
+# 5. 递增和递减运算符
