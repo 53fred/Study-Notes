@@ -116,6 +116,10 @@ public:
     StrBlobPtr& operator--();
     StrBlobPtr operator++(int); //后置运算符
     StrBlobPtr operator--(int);
+private:
+    //若检查成功，check返回一个指向vector的shared_ptr
+    shared_ptr<vector<string>> check(size_t, const string&) const;
+    
 };
 
 StrBlobPtr& StrBlobPtr::operator++(){
@@ -136,4 +140,16 @@ StrBlobPtr StrBlobPtr::operator++(int){
 StrBlobPtr p(a1);
 p.operator++(0);    //后置
 p.operator++();     //前置
+```
+
+# 6. 成员访问运算符
+- 解引用运算符和箭头运算符：  
+
+```C++
+class StrBlobPtr{
+public:
+    string& operator*() const{
+
+    }
+};
 ```
