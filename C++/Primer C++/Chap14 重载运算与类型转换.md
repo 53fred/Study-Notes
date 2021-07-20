@@ -270,3 +270,16 @@ for_each(vs.begin(), vs.end(), PrintString(cerr, '\n'));
 ```
 
 ## 7.1. lambda是函数对象
+```C++
+Eg：
+stable_sort(words.begin(), words.end(), [](const string &a, const string &b){return a.size() < b.size();});
+
+//其行为类似下面这个类的未命名对象：
+class ShorterString{
+public:
+    bool operator()(const string &a, const string &b) const
+    {
+        return a.size() < b.size();
+    }
+};
+```
