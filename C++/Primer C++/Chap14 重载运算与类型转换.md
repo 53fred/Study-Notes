@@ -283,3 +283,16 @@ public:
     }
 };
 ```
+- 通过值捕获的变量被拷贝到lambda中，因此lambda产生的类必须为变量定义数据成员以及构造函数：
+```C++
+auto wc = find_if(words.begin(), words.end(), [sz](const string &a){return a.size() > sz;});
+
+//该lambda表达式将形如：
+class SizeComp{
+    SizeComp(size_t n):sz(n){}
+    bool operator()(const string &a) const
+        {return a.size() > sz;}
+private:
+    size_t sz;
+};
+```
