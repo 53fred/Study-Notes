@@ -296,3 +296,25 @@ private:
     size_t sz;
 };
 ```
+
+# 8. 重载、类型转换与运算符
+## 8.1. 类型转换运算符
+```C++
+operator type() const;
+
+Eg：
+operator int() const {return val;}
+```
+- 类型转换运算符既没有显示的返回类型，也没有形参，而且必须定义成类的成员函数。通常应该是const。
+
+### 8.1.1. 显式的类型转换运算符
+```C++
+class SmallInt{
+public:
+    explicit operator int() const {return val;}
+};
+```
+- 编译器不会将显式的类型转换运算符用于隐式的类型转换。
+- **例外：**如果表达式被用作条件，编译器会将显式的类型转换自动应用于它。
+
+## 8.2. 避免有二义性的类型转换
