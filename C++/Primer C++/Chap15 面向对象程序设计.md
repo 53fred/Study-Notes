@@ -39,3 +39,16 @@ double print_total(const Quote&item);
 # 3. 虚函数
 - 所有虚函数都必须有定义.
 - 动态绑定只有在通过指针或引用调用虚函数时才会发生.
+
+## 3.1. final和override说明符
+- 在C++11中可以使用override关键字说明派生类中的虚函数.
+```C++
+struct a
+{
+    virtual void f1();
+};
+struct b:a
+{
+    void f1() override;
+};
+```
