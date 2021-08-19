@@ -72,14 +72,35 @@ struct d:b
 
 ```C++
 double undiscounted = baseP->Quote::net_price(42);
-```
+```     
 
 # 4. 抽象基类
-
 ## 4.1. 纯虚函数
 - 纯虚函数无需定义,通过在函数体位置书写=0可以将一个虚函数声明为纯虚函数.
 - 也可以为一个纯虚函数提供定义,但必须定义在类的外面.
 
 - 含有纯虚函数的类是抽象基类。抽象基类负责定义接口，而后续的其他类可以覆盖该接口。
 
-# 5. 访问控制与继承
+# 5. 访问控制与继承    
+## 5.1. 受保护的成员
+- 对于类的用户不可访问，对于派生类的成员和友元可以访问。
+
+## 5.2. 友元与继承
+- 友元关系不能继承。
+- 每个类负责控制自己的成员的访问权限。
+
+```C++
+Eg:
+class Base{
+    friend class Pal;
+    int i;
+};
+class S:Base{
+    int s;
+};
+class Pal{
+    int f(Base b){return b.i;}  //true
+    int f2(S s){return s.s;}    //false
+    int f3(S s){return s.i;}    //true
+};
+```
