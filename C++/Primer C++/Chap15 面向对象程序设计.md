@@ -104,3 +104,74 @@ class Pal{
     int f3(S s){return s.i;}    //true
 };
 ```
+
+## 5.3. 改变个别成员的可访问性
+- 有时需要改变派生类继承的某个成员的访问级别，通过使用using声明达到这一目的。
+
+```C
+class Base{
+public:
+    int size() const{return n;}
+protected:
+    int n;
+}
+class Derived:private Base{
+public:
+    using Base::size;
+protected:
+    using Base::n;
+}
+```
+
+- 因为继承了private的base，继承而来的成员是Derived的私有成员。使用using语句改变了这些成员的可访问性。
+- **派生类只能为它可以访问的名字使用using。**
+
+## 5.4. 类型转换
+1： 假定B继承自A，无论B以什么方式继承A，B的成员函数和友元都能使用派生类到基类的转换   
+2： B继承A的方式是公有或者保护，则B的派生类的成员或友元可以使用B到A的转换，若未私有则不行   
+3： B继承A的方式是公有的，用户的代码才能使用B到A的（派生类到基类）的转换，保护或者私有方式则不行  
+
+## 5.5. 继承方式
+- 不同的继承方式：   
+1. **public继承：** 基类public成员，protected成员，private成员的访问属性在派生类中分别变成：
+public(类内：可访问（直接访问）；类外：可访问（直接访问）)，  
+protected(类内：可访问（直接访问）；类外：可访问（间接访问）)，  
+private(类内：可访问（间接访问）；类外：可访问（间接的间接访问）)  
+
+2. **protected继承：**基类public成员，protected成员，private成员的访问属性在派生类中分别变成：   
+protected(类内：可访问（直接访问）；类外：可访问（间接访问）)，  
+protected(类内：可访问（直接访问）；类外：可访问（间接访问）)，  
+private(类内：可访问（间接访问）；类外：可访问（间接的间接访问）)  
+
+3. **private继承**：基类public成员，protected成员，private成员的访问属性在派生类中分别变成：   
+private(类内：可访问（直接访问）；类外：可访问（间接访问）)，  
+private(类内：可访问（直接访问）；类外：可访问（间接访问）)，  
+private(类内：可访问（间接访问）；类外：可访问（间接的间接访问）)
+
+# 6. 继承中的类作用域
+## 6.1. 通过作用于运算符来使用隐藏的成员
+```C++
+struct Derived:Base{
+    int get_num(){return Base::num;}
+};
+```
+
+- 名字查找优先于类型检查，**派生类中的函数并不会重载基类中的函数**。    
+如果派生类的某个成员与基类的某个成员名称相同，即使参数列表不同，派生类也会在作用域内隐藏掉基类成员。
+
+- 虚函数：动态绑定，代码在运行时确定使用虚函数的哪个版本。
+- 非虚函数：静态绑定，调用的函数版本由指针的静态类型决定。
+
+```C++
+//virtual function
+Base *bp1 = &bobj, *bp2 = &d1obj;
+bp1->fun();     //base::fun
+bp2->fun();     //D1::fun
+//non-virtual function
+Base *p1 = &d1obj;  
+D1 *p2 = &d1obj;
+p1->fun();      //base::fun, though object is D1
+p2->fun();      //D1::fun
+```
+
+# 7. 构造函数与拷贝控制
